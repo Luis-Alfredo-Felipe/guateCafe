@@ -489,52 +489,54 @@
 
     </main>
 
+    <!-- MODAL PARA VIDEO LOCAL -->
+    <div id="modal-video" class="modal-video-overlay">
+        <div class="modal-video-contenido">
+            <span class="cerrar-modal" id="btn-cerrar-video">&times;</span>
+            <h3 class="titulo-modal">Historia GuateCafé</h3>
+            <video id="reproductor-video" controls preload="metadata">
+                <source src="GuateCafe.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de este video.
+            </video>
+        </div>
+    </div>
+
     <!-- Enlace a tu archivo JavaScript -->
     <script src="script.js"></script>
 
         <!-- FOOTER CON ÍCONOS REALES SVG -->
-<footer class="footer-contenedor-full">
-    <div class="tarjeta-footer-full">
-        <h4 class="titulo-tarjeta">Síguenos en nuestras redes sociales</h4>
+    <footer class="footer-contenedor-full">
+        <div class="tarjeta-footer-full">
+            <h4 class="titulo-tarjeta">Síguenos en nuestras redes sociales</h4>
 
-        <div class="enlaces-bloque">
-            <!-- Facebook -->
-            <a href="https://www.facebook.com/luisalfredo.felipesic/" target="_blank" class="item-red">
-                <svg class="icono-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                Facebook
-            </a>
+            <div class="enlaces-bloque">
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/luisalfredo.felipesic/" target="_blank" class="item-red">
+                    <svg class="icono-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    Facebook
+                </a>
 
-            <!-- Gmail -->
-            <a href="mailto:genttilez@gmail.com|" class="item-red">
-                <svg class="icono-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.272H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L12 9.545l8.073-6.052c1.618-1.214 3.927-.059 3.927 1.964z"/></svg>
-                Gmail
-            </a>
+                <!-- Gmail -->
+                <a href="mailto:genttilez@gmail.com|" class="item-red">
+                    <svg class="icono-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.272H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L12 9.545l8.073-6.052c1.618-1.214 3.927-.059 3.927 1.964z"/></svg>
+                    Gmail
+                </a>
 
-            <!-- YouTube -->
-            <a href="https://youtube.com/@luis_alfredo_felipe_sic?si=j6NclONuBQlIggoy" target="_blank" class="item-red">
-                <svg class="icono-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                YouTube
-            </a>
+                <!-- YouTube -->
+                <a href="https://youtube.com/@luis_alfredo_felipe_sic?si=j6NclONuBQlIggoy" target="_blank" class="item-red">
+                    <svg class="icono-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    YouTube
+                </a>
 
-            <!-- GitHub -->
-            <a href="https://github.com/Luis-Alfredo-Felipe" target="_blank" class="item-red">
-                <svg class="icono-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                GitHub
-            </a>
+                <!-- GitHub -->
+                <a href="https://github.com/Luis-Alfredo-Felipe" target="_blank" class="item-red">
+                    <svg class="icono-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+
+            <p class="subtexto-footer">Optimización y Análisis de Rutas de Transporte | GuateCafé</p>
         </div>
-
-        <!-- BOTÓN VIDEO HISTORIA -->
-        <div class="contenedor-video-link">
-            <a href="https://youtu.be/oRTcInwG1GE" target="_blank" class="btn-video">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z"/>
-                </svg>
-                Ver Historia GuateCafé
-            </a>
-        </div>
-
-        <p class="subtexto-footer">Optimización y Análisis de Rutas de Transporte | GuateCafé</p>
-    </div>
 </footer>
 
 </body>
