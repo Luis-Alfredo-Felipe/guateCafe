@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costo Mínimo - GuateCafé</title>
+    <link rel="stylesheet" href="style.css"> <!-- Aquí ocurre la magia del diseño -->
+</head>
+<body>
+
+    <header id="inicio" style="position: relative;">
+        <!-- Centro: Logo y Títulos -->
+        <div class="logo-container">
+            <img src="Logo.png" alt="Logo GuateCafé">
+        </div>
+        <h1>GuateCafé</h1>
+        <h2>Distribuidora de Café - Buen café, grandes historias</h2>
+
+        <!-- Derecha: Menú Desplegable Costo Mínimo -->
+        <nav class="menu-lateral">
+            <div class="dropdown">
+                <button class="dropbtn">MODELO COSTO MÍNIMO ▼</button>
+                <div class="dropdown-content">
+                    <a href="index.html" style="font-weight: bold; color: var(--rojo-cereza);">Regresar al Inicio</a>
+                    <a href="#matriz-inicial">Matriz Inicial de Costos</a>
+                    <a href="#matriz-asignaciones">Matriz de Asignaciones</a>
+                    <a href="tablasMetodoCostoMin.html">Iteraciones de Costo Mínimo</a>
+                    <a href="#calculo-total">Cálculo del Costo Total</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="container">
+        <!-- SECCIÓN 1: MATRIZ INICIAL -->
+        <section id="matriz-inicial" class="seccion-bloque">
+            <h3><a href="#inicio" class="titulo-enlace">Matriz Inicial de Costos</a></h3>
+            <p>A continuación se detallan las tarifas cotizadas (en Quetzales) para enviar una caja maestra de 50 libras desde cada fábrica hacia cada distribuidor departamental.</p>
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada">
+                    <thead>
+                        <tr>
+                            <th>Origen (Fábricas) \ Destino</th>
+                            <th>1. Capital</th>
+                            <th>2. Quetzaltenango</th>
+                            <th>3. Escuintla</th>
+                            <th>4. Cobán</th>
+                            <th>5. Puerto Barrios</th>
+                            <th>6. Flores, Petén</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>F1: Antigua Guatemala</td>
+                            <td>Q 58.00</td><td>Q 73.00</td><td>Q 58.00</td><td>Q 73.00</td><td>Q 80.00</td><td>Q 80.00</td>
+                        </tr>
+                        <tr>
+                            <td>F2: Ciudad Guatemala</td>
+                            <td>Q 39.00</td><td>Q 73.00</td><td>Q 58.00</td><td>Q 73.00</td><td>Q 73.00</td><td>Q 80.00</td>
+                        </tr>
+                        <tr>
+                            <td>F3: Chimaltenango</td>
+                            <td>Q 58.00</td><td>Q 73.00</td><td>Q 64.00</td><td>Q 73.00</td><td>Q 80.00</td><td>Q 80.00</td>
+                        </tr>
+                        <tr>
+                            <td>F4: Escuintla</td>
+                            <td>Q 58.00</td><td>Q 73.00</td><td>Q 58.00</td><td>Q 73.00</td><td>Q 80.00</td><td>Q 80.00</td>
+                        </tr>
+                        <tr>
+                            <td>F5: Zacapa</td>
+                            <td>Q 64.00</td><td>Q 80.00</td><td>Q 73.00</td><td>Q 64.00</td><td>Q 73.00</td><td>Q 80.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: ASIGNACIONES -->
+        <section id="matriz-asignaciones" class="seccion-bloque">
+            <h3><a href="#inicio" class="titulo-enlace">Matriz de Asignaciones (Costo Mínimo)</a></h3>
+            <p> Se agregan los requerimientos de Oferta y Demanda. Para balancear el modelo (donde la demanda supera la oferta por 600 unidades), se crea el origen "F6: Ficticia" con costos de envío de Q0.00. </p>
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada">
+                    <thead>
+                        <tr>
+                            <th>Origen \ Destino</th>
+                            <th>1. Capital</th>
+                            <th>2. Xela</th>
+                            <th>3. Escuintla</th>
+                            <th>4. Cobán</th>
+                            <th>5. Pto. Barrios</th>
+                            <th>6. Petén</th>
+                            <th class="col-oferta">Oferta/Cajas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>F1: Antigua Guatemala</strong></td>
+                            <td>Q 58.00</td><td>Q 73.00</td><td>Q 58.00</td><td>Q 73.00</td><td>Q 80.00</td><td>Q 80.00</td><td class="col-oferta">1500</td>
+                        </tr>
+                        <tr>
+                            <td><strong>F2: Ciudad Guatemala</strong></td>
+                            <td>Q 39.00</td><td>Q 73.00</td><td>Q 58.00</td><td>Q 73.00</td><td>Q 73.00</td><td>Q 80.00</td><td class="col-oferta">1200</td>
+                        </tr>
+                        <tr>
+                            <td><strong>F3: Chimaltenango</strong></td>
+                            <td>Q 58.00</td><td>Q 73.00</td><td>Q 64.00</td><td>Q 73.00</td><td>Q 80.00</td><td>Q 80.00</td><td class="col-oferta">1000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>F4: Escuintla</strong></td>
+                            <td>Q 58.00</td><td>Q 73.00</td><td>Q 58.00</td><td>Q 73.00</td><td>Q 80.00</td><td>Q 80.00</td><td class="col-oferta">800</td>
+                        </tr>
+                        <tr>
+                            <td><strong>F5: Zacapa</strong></td>
+                            <td>Q 64.00</td><td>Q 80.00</td><td>Q 73.00</td><td>Q 64.00</td><td>Q 73.00</td><td>Q 80.00</td><td class="col-oferta">500</td>
+                        </tr>
+                        <tr class="fila-ficticia">
+                            <td><strong>F6: Ficticia (Déficit)</strong></td>
+                            <td>Q 0.00</td><td>Q 0.00</td><td>Q 0.00</td><td>Q 0.00</td><td>Q 0.00</td><td>Q 0.00</td><td class="col-oferta">600</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Demanda/Cajas</strong></td>
+                            <td>1600</td>
+                            <td>1200</td>
+                            <td>900</td>
+                            <td>800</td>
+                            <td>700</td>
+                            <td>400</td>
+                            <td class="col-oferta">5,600</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </section>
+
+        <!-- SECCIÓN: ITERACIONES DE COSTO MÍNIMO -->
+        <section id="iteraciones" class="seccion-bloque">
+            <h3><a href="#inicio" class="titulo-enlace">Asignación por Método de Costo Mínimo</a></h3>
+
+            <p>El sistema ha rastrea la matriz iterativamente, buscando siempre la celda con el menor costo disponible, y asignando la máxima cantidad posible sin exceder la oferta de la fila ni la demanda de la columna.</p>
+            <p>Este es el resumen de las iteraciones ejecutadas en memoria:</p>
+
+            <ul class="lista-iteraciones">
+                <li><span class="badge-verde">Costo Q 0.00</span> <strong>(Ficticia a 6. Petén):</strong> Se asignan 400 cajas. Se cubre la demanda de Petén. Quedan 200 en F6.</li>
+
+                <li><span class="badge-verde">Costo Q 0.00</span> <strong>(Ficticia a 5. Pto. Barrios):</strong> Se asignan los 200 restantes. Se agota F6. Faltan 500 para Pto. Barrios.</li>
+
+                <li><span class="badge-verde">Costo Q 39.00</span> <strong>(F2 a 1. Capital):</strong> Es el costo real más bajo de la tabla. Se asignan 1200 cajas. Se agota F2. Faltan 400 para la Capital.</li>
+
+                <li><span class="badge-verde">Costo Q 58.00</span> <strong>(F1 a 1. Capital):</strong> Se asignan las 400 cajas restantes. Se cubre la Capital. Quedan 1100 en F1.</li>
+
+                <li><span class="badge-verde">Costo Q 58.00</span> <strong>(F1 a 3. Escuintla):</strong> Se asignan 900 cajas. Se cubre Escuintla. Quedan 200 en F1.</li>
+
+                <li><span class="badge-verde">Costo Q 64.00</span> <strong>(F5 a 4. Cobán):</strong> Se asignan 500 cajas. Se agota F5. Faltan 300 para Cobán.</li>
+
+                <li><span class="badge-verde">Costo Q 73.00</span> <strong>(F1 a 2. Xela):</strong> Se asignan las 200 cajas restantes de F1. Se agota F1. Faltan 1000 para Xela.</li>
+
+                <li><span class="badge-verde">Costo Q 73.00</span> <strong>(F3 a 2. Xela):</strong> Se asignan 1000 cajas. Se cubre Xela y se agota F3.</li>
+
+                <li><span class="badge-verde">Costo Q 73.00</span> <strong>(F4 a 4. Cobán):</strong> Se asignan las 300 cajas que faltaban. Se cubre Cobán. Quedan 500 en F4.</li>
+
+                <li><span class="badge-verde">Costo Q 80.00</span> <strong>(F4 a 5. Pto. Barrios):</strong> Se asignan las 500 cajas restantes a la última celda disponible. Matriz completada.</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 3: CÁLCULO FINAL -->
+        <section id="calculo-total" class="seccion-bloque">
+            <div class="encabezado-con-boton">
+                <h3><a href="#inicio" class="titulo-enlace">Cálculo del Costo Total (Z)</a></h3>
+                <a href="tablasMetodoCostoMin.html" class="btn-iteraciones" target="_blank">Ver Iteraciones</a>
+            </div>
+            <p>Tabla Final de Distribución
+                Los números en negrita representan la cantidad de cajas asignadas a esa ruta. Las celdas vacías indican cero envíos.
+            </p>
+
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada tabla-matriz">
+                    <thead>
+                        <tr>
+                            <th>Origen \ Destino</th>
+                            <th>1. Capital</th>
+                            <th>2. Xela</th>
+                            <th>3. Escuintla</th>
+                            <th>4. Cobán</th>
+                            <th>5. Pto. Barrios</th>
+                            <th>6. Petén</th>
+                            <th class="col-oferta">Oferta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>F1: Antigua</strong></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q58</span><span class="asignacion">[400]</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q73</span><span class="asignacion">[200]</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q58</span><span class="asignacion">[900]</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q73</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q80</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q80</span></td>
+                            <td class="col-oferta">1500</td>
+                        </tr>
+                        <tr>
+                            <td><strong>F2: Ciudad de Guatemala</strong></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q39</span><span class="asignacion">[1200]</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q73</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q58</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q73</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q73</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q80</span></td>
+                            <td class="col-oferta">1200</td>
+                        </tr>
+                        <tr>
+                            <td><strong>F3: Chimaltenango</strong></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q58</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q73</span><span class="asignacion">[1000]</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q64</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q73</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q80</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q80</span></td>
+                            <td class="col-oferta">1000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>F4: Escuintla</strong></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q58</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q73</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q58</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q73</span><span class="asignacion">[300]</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q80</span><span class="asignacion">[500]</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q80</span></td>
+                            <td class="col-oferta">800</td>
+                        </tr>
+                        <tr>
+                            <td><strong>F5: Zacapa</strong></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q64</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q80</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q73</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q64</span><span class="asignacion">[500]</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q73</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q80</span></td>
+                            <td class="col-oferta">500</td>
+                        </tr>
+                        <tr class="fila-ficticia">
+                            <td><strong>F6: Ficticia (Déficit)</strong></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q0</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q0</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q0</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q0</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q0</span> <span class="asignacion">[200]</span></td>
+                            <td class="celda-matriz"><span class="costo-esquina">Q0</span> <span class="asignacion">[400]</span></td>
+                            <td class="col-oferta">600</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Demanda</strong></td>
+                            <td>1600</td>
+                            <td>1200</td>
+                            <td>900</td>
+                            <td>800</td>
+                            <td>700</td>
+                            <td>400</td>
+                            <td class="col-oferta"><strong>5600</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="caja-calculo">
+                <h4>Cálculo del Costo Mínimo Total (Z)</h4>
+                <p class="formula">Z = [58 * 400] + [39 * 1200] + [73 * 200] + [73 * 1000] + [58 * 900] + [73 * 300] + [64 * 500] + [80 * 500] + [0 * 200] +[0 * 400]</p>
+                <p class="formula">Z = 23,200 + 46,800 + 14,600 + 73,000 + 52,200 + 21,900 + 32,000 + 40,000 + 0 + 0</p>
+                <p class="resultado-z">Costo Mínimo de Distribución (Z) = Q 303,700.00</p>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
