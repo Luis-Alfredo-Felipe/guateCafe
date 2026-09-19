@@ -19,9 +19,11 @@ function evaluarBusqueda() {
     const palabrasModi = ["modi", "optimalidad", "prueba", "delta", "multiplicador", "u y v"];
     const palabrasComparar = ["comparar", "modelo", "resultado", "resumen", "mejor", "tablero", "kpi"];
     const palabrasVideo = ["video", "historia", "clip", "presentacion", "demostracion", "intro"];
+    const palabrasReporte = ["reporte", "informe", "pdf", "generar", "descargar", "documento"];
     const esModi = palabrasModi.some(p => texto.includes(p));
     const esComparar = palabrasComparar.some(p => texto.includes(p));
     const esVideo = palabrasVideo.some(p => texto.includes(p));
+    const esReporte = palabrasReporte.some(p => texto.includes(p));
     if (esVideo) {
         abrirVideo();
         inputBusqueda.value = '';
@@ -30,6 +32,9 @@ function evaluarBusqueda() {
         inputBusqueda.value = '';
     } else if (esComparar) {
         window.open('comparar.html', '_blank');
+        inputBusqueda.value = '';
+    } else if (esReporte) {
+        window.open('informeMetodos.pdf', '_blank');
         inputBusqueda.value = '';
     } else if (texto !== "") {
         alert('No se encontraron resultados para: ' + texto);
