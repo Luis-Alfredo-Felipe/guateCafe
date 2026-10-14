@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Modelos - GuateCafé</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+</head>
+<body class="gc-body">
+
+    <div class="gc-viewport">
+        <div class="gc-card">
+
+            <!-- SECCIÓN IZQUIERDA: Marca y Descripción -->
+            <div class="gc-left">
+                <h1 class="gc-title">Modelos de Transporte</h1>
+                <p class="gc-desc">
+                    Plataforma de optimización de rutas de distribución. Seleccione el algoritmo matemático para evaluar costos y asignaciones.
+                </p>
+                <div class="gc-accent-line"></div>
+            </div>
+
+            <!-- SECCIÓN DERECHA: Carrusel de Tarjetas -->
+            <div class="gc-right">
+                <h2 class="gc-titulo-derecho">INVESTIGACIÓN DE OPERACIONES</h2>
+                <div class="gc-slider">
+                    <!-- Tarjeta 1: Noroeste -->
+                    <div class="gc-item">
+                        <span class="gc-item-badge">Modelo 01</span>
+                        <h3>Esquina Noroeste</h3>
+                        <p>Asignación inicial rápida comenzando desde la esquina superior izquierda de la matriz.</p>
+                        <button class="gc-btn" onclick="window.location.href='index.html'">Esquina Noroeste &rarr;</button>
+                    </div>
+
+                    <!-- Tarjeta 2: Costo Mínimo -->
+                    <div class="gc-item">
+                        <span class="gc-item-badge">Modelo 02</span>
+                        <h3>Costo Mínimo</h3>
+                        <p>Prioriza la asignación en las celdas con menor tarifa de envío dentro de la matriz.</p>
+                        <button class="gc-btn" onclick="window.location.href='costoMinimo.html'">Costo Mínimo &rarr;</button>
+                    </div>
+
+                    <!-- Tarjeta 3: Vogel -->
+                    <div class="gc-item">
+                        <span class="gc-item-badge">Modelo 03</span>
+                        <h3>Método Vogel</h3>
+                        <p>Análisis avanzado mediante penalizaciones para encontrar la solución más óptima.</p>
+                        <button class="gc-btn" onclick="window.location.href='metodoVogel.html'">Método Vogel &rarr;</button>
+                    </div>
+
+                    <!-- Tarjeta 4: Genérica -->
+                    <div class="gc-item">
+                        <span class="gc-item-badge">Modelo 04</span>
+                        <h3>Modelo Hungaro</h3>
+                        <p>Algoritmo para la asignación óptima de recursos a tareas específicas al menor costo.</p>
+                        <button class="gc-btn" onclick="window.location.href='modeloHungaro.html'">Método Hungaro &rarr;</button>
+                    </div>
+
+                    <!-- Tarjeta 5: Genérica -->
+                    <div class="gc-item">
+                        <span class="gc-item-badge">Modelo 05</span>
+                        <h3>Cruce del Arroyo</h3>
+                        <p>Evaluación de variables de holgura para optimización y verificación de optimalidad.</p>
+                        <button class="gc-btn" onclick="alert('Próximamente')">Calcular Modelo &rarr;</button>
+                    </div>
+
+                    <!-- Tarjeta 6: Genérica -->
+                    <div class="gc-item">
+                        <span class="gc-item-badge">Modelo 06</span>
+                        <h3>Distribución MODI</h3>
+                        <p>Método de distribución modificada para calcular índices de mejora en la red.</p>
+                        <button class="gc-btn" onclick="alert('Próximamente')">Calcular Modelo &rarr;</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechCore & DataTarget - Método Húngaro</title>
+    <style>
+        /* ================= ESTILOS GLOBALES BASE ================= */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .contenedor-principal {
+            background-color: rgba(255, 255, 255, 0.95);
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo-container img {
+            max-width: 280px;
+        }
+        .seccion-bloque {
+            margin-bottom: 40px;
+        }
+        
+        /* ================= ESTILOS DE TABLAS (GENERALES) ================= */
+        .tabla-contenedor {
+            overflow-x: auto;
+            margin: 20px 0;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .tabla-estilizada {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            table-layout: fixed;
+        }
+        .tabla-estilizada th, .tabla-estilizada td {
+            padding: 12px 8px;
+            border: 1px solid #d1d9e6;
+            position: relative;
+        }
+        .tabla-estilizada th:first-child, .tabla-estilizada td:first-child {
+            text-align: left;
+            font-weight: bold;
+        }
+        .col-ficticia {
+            background-color: #f0f4f8;
+            color: #555;
+            font-style: italic;
+        }
+        
+        /* ================= LÍNEAS DE TACHADO ================= */
+        td.linea-horizontal::before {
+            content: ""; position: absolute; top: 50%; left: 0; right: 0;
+            height: 1px; transform: translateY(-50%); pointer-events: none;
+        }
+        td.linea-vertical::after {
+            content: ""; position: absolute; top: 0; bottom: 0; left: 50%;
+            width: 1px; transform: translateX(-50%); pointer-events: none;
+        }
+        td.linea-cruzada::before {
+            content: ""; position: absolute; top: 50%; left: 0; right: 0;
+            height: 1px; transform: translateY(-50%); pointer-events: none;
+        }
+        td.linea-cruzada::after {
+            content: ""; position: absolute; top: 0; bottom: 0; left: 50%;
+            width: 1px; transform: translateX(-50%); pointer-events: none;
+        }
+
+        /* ================= RESULTADOS ================= */
+        .resultado-final {
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 30px 0;
+            line-height: 1.8;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .resultado-z {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* ========================================================= */
+        /* ================= TEMA 1: TECHCORE ====================== */
+        /* ========================================================= */
+        #techcore-section {
+            background-image: url('fondoTech.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            padding: 40px 20px;
+        }
+        #techcore-section .titulo-seccion {
+            color: #001f3f;
+            border-bottom: 2px solid #00a8ff;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+        #techcore-section h3 { color: #003366; margin-top: 25px; }
+        #techcore-section .tabla-estilizada thead tr.fila-principal th {
+            background-color: #001f3f;
+            color: white;
+            font-weight: 600;
+        }
+        #techcore-section .celda-optima {
+            background-color: #e0f7fa !important;
+            color: #0077b6 !important;
+            font-weight: bold;
+            border: 2px solid #00a8ff !important;
+        }
+        #techcore-section td.linea-horizontal::before,
+        #techcore-section td.linea-vertical::after,
+        #techcore-section td.linea-cruzada::before,
+        #techcore-section td.linea-cruzada::after {
+            background-color: rgba(0, 168, 255, 0.4);
+        }
+        #techcore-section td.linea-cruzada { color: #d90429; font-weight: bold; }
+        #techcore-section .resultado-final {
+            color: #001f3f; background: #f1f8ff; border: 2px dashed #00a8ff;
+        }
+        #techcore-section .resultado-z { color: #00a8ff; }
+
+        /* ========================================================= */
+        /* ================= TEMA 2: DATATARGET ==================== */
+        /* ========================================================= */
+        #datatarget-section {
+            background-image: url('fondoTarget.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            padding: 40px 20px;
+        }
+        #datatarget-section .titulo-seccion {
+            color: #2b2d42; /* Gris oscuro / Negro */
+            border-bottom: 2px solid #ef233c; /* Rojo vibrante */
+            padding-bottom: 10px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+        #datatarget-section h3 { color: #8d99ae; margin-top: 25px; } /* Gris intermedio */
+        #datatarget-section .tabla-estilizada thead tr.fila-principal th {
+            background-color: #2b2d42; /* Gris oscuro para el header de la tabla */
+            color: white;
+            font-weight: 600;
+        }
+        #datatarget-section .celda-optima {
+            background-color: #ffe5d9 !important; /* Salmón muy claro */
+            color: #d90429 !important; /* Rojo oscuro */
+            font-weight: bold;
+            border: 2px solid #ef233c !important; /* Borde rojo */
+        }
+        #datatarget-section td.linea-horizontal::before,
+        #datatarget-section td.linea-vertical::after,
+        #datatarget-section td.linea-cruzada::before,
+        #datatarget-section td.linea-cruzada::after {
+            background-color: rgba(239, 35, 60, 0.4); /* Rojo translúcido */
+        }
+        #datatarget-section td.linea-cruzada { color: #d90429; font-weight: bold; }
+        #datatarget-section .resultado-final {
+            color: #2b2d42; background: #fff0f3; border: 2px dashed #ef233c; /* Fondo rosa pálido, borde rojo */
+        }
+        #datatarget-section .resultado-z { color: #d90429; } /* Rojo oscuro */
+    </style>
+</head>
+<body>
+    <!-- ================== EMPRESA 1: TECHCORE ================== -->
+    <div id="techcore-section">
+        <div class="contenedor-principal">
+            <div class="logo-container">
+                <img src="Tech.png" alt="TechCore Solutions Logo">
+            </div>
+
+            <!-- SECCIÓN 1 -->
+            <div class="seccion-bloque">
+                <h2 class="titulo-seccion">1. Planteamiento del Caso Corporativo</h2>
+                <p><strong>Contexto de la Empresa:</strong> TechCore Solutions es una firma de ingeniería de software dedicada al desarrollo de sistemas empresariales. Actualmente, se encuentra en la fase crítica del sprint de desarrollo para un nuevo sistema web basado en arquitectura MVC.</p>
+                <p><strong>El Problema:</strong> Se han identificado 5 módulos críticos. Sin embargo, el equipo cuenta con solo 4 programadores senior disponibles. Al existir más tareas (5 módulos) que recursos (4 programadores), nos enfrentamos a un problema de asignación desbalanceado.</p>
+                <p><strong>Objetivo del Modelo:</strong> Asignar exactamente un módulo a cada programador para minimizar el tiempo total de desarrollo. El módulo sin asignar será reprogramado.</p>
+            </div>
+
+            <!-- SECCIÓN 2 -->
+            <div class="seccion-bloque">
+                <h2 class="titulo-seccion">2. Matriz Original</h2>
+                <p>Tiempos estimados (en horas):</p>
+                <div class="tabla-contenedor">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 25%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Programador</th>
+                                <th>M1: Config BD</th>
+                                <th>M2: Backend</th>
+                                <th>M3: Lógica</th>
+                                <th>M4: Frontend</th>
+                                <th>M5: Integración</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>P1: Ing. Arana</td><td>18</td><td>24</td><td>25</td><td>26</td><td>28</td></tr>
+                            <tr><td>P2: Ing. Barrios</td><td>18</td><td>22</td><td>24</td><td>25</td><td>26</td></tr>
+                            <tr><td>P3: Ing. Cifuentes</td><td>22</td><td>18</td><td>20</td><td>24</td><td>25</td></tr>
+                            <tr><td>P4: Ing. Domínguez</td><td>24</td><td>18</td><td>22</td><td>21</td><td>23</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 3 -->
+            <div class="seccion-bloque">
+                <h2 class="titulo-seccion">3. Resolución por el Método Húngaro</h2>
+
+                <h3>Paso 1: Balanceo de la Matriz (Fila Ficticia) y Paso 2: Reducción por Filas</h3>
+                <p>Se agrega P5 (Ficticio) con costos 0. Luego se resta el valor mínimo de cada fila a toda la fila.</p>
+
+                <div class="tabla-contenedor" style="overflow: visible; padding-right: 50px;">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 25%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Programador</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>P1</td><td>0</td><td>6</td><td>7</td><td>8</td>
+                                <td style="position: relative;">10 <span style="position: absolute; right: -45px; top: 50%; transform: translateY(-50%); color: #d90429; font-weight: bold; font-size: 1.15rem;">-18</span></td>
+                            </tr>
+                            <tr>
+                                <td>P2</td><td>0</td><td>4</td><td>6</td><td>7</td>
+                                <td style="position: relative;">8 <span style="position: absolute; right: -45px; top: 50%; transform: translateY(-50%); color: #d90429; font-weight: bold; font-size: 1.15rem;">-18</span></td>
+                            </tr>
+                            <tr>
+                                <td>P3</td><td>4</td><td>0</td><td>2</td><td>6</td>
+                                <td style="position: relative;">7 <span style="position: absolute; right: -45px; top: 50%; transform: translateY(-50%); color: #d90429; font-weight: bold; font-size: 1.15rem;">-18</span></td>
+                            </tr>
+                            <tr>
+                                <td>P4</td><td>6</td><td>0</td><td>4</td><td>3</td>
+                                <td style="position: relative;">5 <span style="position: absolute; right: -45px; top: 50%; transform: translateY(-50%); color: #d90429; font-weight: bold; font-size: 1.15rem;">-18</span></td>
+                            </tr>
+                            <tr class="col-ficticia">
+                                <td>P5 (Ficticio)</td><td>0</td><td>0</td><td>0</td><td>0</td>
+                                <td style="position: relative;">0 <span style="position: absolute; right: -45px; top: 50%; transform: translateY(-50%); color: #d90429; font-weight: bold; font-size: 1.15rem;">-0</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Iteración 1: Trazamos 3 líneas (C1, C2, F5)</h3>
+                <p>L = 3 (No es óptimo). Mínimo no cubierto = 2. Restamos 2 a los valores no cubiertos y sumamos 2 a las intersecciones (P5-M1 y P5-M2).</p>
+                <div class="tabla-contenedor">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 25%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Programador</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>P1</td><td class="linea-vertical">0</td><td class="linea-vertical">6</td><td>7</td><td>8</td><td>10</td></tr>
+                            <tr><td>P2</td><td class="linea-vertical">0</td><td class="linea-vertical">4</td><td>6</td><td>7</td><td>8</td></tr>
+                            <tr><td>P3</td><td class="linea-vertical">4</td><td class="linea-vertical">0</td><td>2</td><td>6</td><td>7</td></tr>
+                            <tr><td>P4</td><td class="linea-vertical">6</td><td class="linea-vertical">0</td><td>4</td><td>3</td><td>5</td></tr>
+                            <tr class="col-ficticia"><td class="linea-horizontal">P5</td><td class="linea-cruzada">0</td><td class="linea-cruzada">0</td><td class="linea-horizontal">0</td><td class="linea-horizontal">0</td><td class="linea-horizontal">0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Iteración 2: Trazamos 4 líneas (Columna 1, Columna 2, Fila 3 y Fila 5)</h3>
+                <p>L = 4 (No es óptimo). Mínimo no cubierto = 1. Restamos 1 a los valores no cubiertos y sumamos 1 a las intersecciones. </p>
+                <div class="tabla-contenedor">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 25%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Programador</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>P1</td><td class="linea-vertical">0</td><td class="linea-vertical">6</td><td>5</td><td>6</td><td>8</td></tr>
+                            <tr><td>P2</td><td class="linea-vertical">0</td><td class="linea-vertical">4</td><td>4</td><td>5</td><td>6</td></tr>
+                            <tr><td class="linea-horizontal">P3</td><td class="linea-cruzada">4</td><td class="linea-cruzada">0</td><td class="linea-horizontal">0</td><td class="linea-horizontal">4</td><td class="linea-horizontal">5</td></tr>
+                            <tr><td>P4</td><td class="linea-vertical">6</td><td class="linea-vertical">0</td><td>2</td><td>1</td><td>3</td></tr>
+                            <tr class="col-ficticia"><td class="linea-horizontal">P5</td><td class="linea-cruzada">2</td><td class="linea-cruzada">2</td><td class="linea-horizontal">0</td><td class="linea-horizontal">0</td><td class="linea-horizontal">0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Iteración 3: Trazamos 4 líneas (Columna 1, Columna 3, Fila 4 y Fila 5.)</h3>
+                <p>L = 4 (No es óptimo). El valor mínimo no cubierto es 1 (P3, M2). Restamos 1 a los valores no cubiertos y sumamos 1 a las intersecciones.</p>
+                <div class="tabla-contenedor">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 25%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Programador</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>P1</td><td class="linea-vertical">0</td><td>6</td><td class="linea-vertical">4</td><td>5</td><td>7</td></tr>
+                            <tr><td>P2</td><td class="linea-vertical">0</td><td>4</td><td class="linea-vertical">3</td><td>4</td><td>5</td></tr>
+                            <tr><td>P3</td><td class="linea-vertical">5</td><td>1</td><td class="linea-vertical">0</td><td>4</td><td>5</td></tr>
+                            <tr><td class="linea-horizontal">P4</td><td class="linea-cruzada">6</td><td class="linea-horizontal">0</td><td class="linea-cruzada">1</td><td class="linea-horizontal">0</td><td class="linea-horizontal">2</td></tr>
+                            <tr class="col-ficticia"><td class="linea-horizontal">P5</td><td class="linea-cruzada">3</td><td class="linea-horizontal">3</td><td class="linea-cruzada">0</td><td class="linea-horizontal">0</td><td class="linea-horizontal">0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Iteración 4: Trazamos 4 líneas (Columna 1, Fila 3, Fila 4 y Fila 5)</h3>
+                <p>El valor mínimo no cubierto es 3 (P2, M2, M3, M4). Restamos 3 a los valores no cubiertos y sumamos 3 a las intersecciones.</p>
+                <div class="tabla-contenedor">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 25%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Programador</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>P1</td><td class="linea-vertical">0</td><td>5</td><td>4</td><td>4</td><td>6</td></tr>
+                            <tr><td>P2</td><td class="linea-vertical">0</td><td>3</td><td>3</td><td>3</td><td>4</td></tr>
+                            <tr><td class="linea-horizontal">P3</td><td class="linea-cruzada">5</td><td class="linea-horizontal">0</td><td class="linea-horizontal">0</td><td class="linea-horizontal">3</td><td class="linea-horizontal">4</td></tr>
+                            <tr><td class="linea-horizontal">P4</td><td class="linea-cruzada">7</td><td class="linea-horizontal">0</td><td class="linea-horizontal">2</td><td class="linea-horizontal">0</td><td class="linea-horizontal">2</td></tr>
+                            <tr class="col-ficticia"><td class="linea-horizontal">P5</td><td class="linea-cruzada">4</td><td class="linea-horizontal">3</td><td class="linea-horizontal">1</td><td class="linea-horizontal">0</td><td class="linea-horizontal">0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 4 -->
+            <div class="seccion-bloque">
+                <h2 class="titulo-seccion">4. Solución Óptima y Asignación</h2>
+
+                <h3>Matriz Final Óptima: Elegimos los Ceros </h3>
+                <div class="tabla-contenedor">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 25%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Programador</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>P1</td><td class="celda-optima">0</td><td>2</td><td>1</td><td>1</td><td>3</td></tr>
+                            <tr><td>P2</td><td>0</td><td>0</td><td class="celda-optima">0</td><td>0</td><td>1</td></tr>
+                            <tr><td>P3</td><td>8</td><td class="celda-optima">0</td><td>0</td><td>3</td><td>4</td></tr>
+                            <tr><td>P4</td><td>10</td><td>0</td><td>2</td><td class="celda-optima">0</td><td>2</td></tr>
+                            <tr class="col-ficticia"><td>P5 (Ficticio)</td><td>7</td><td>3</td><td>1</td><td>0</td><td class="celda-optima">0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Asignacion de Valores a Tabla Matriz Original</h3>
+                <div class="tabla-contenedor">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 25%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;"><col style="width: 15%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Programador</th><th>M1: Config BD</th><th>M2: Backend</th><th>M3: Lógica</th><th>M4: Frontend</th><th>M5: Integración</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>P1: Ing. Arana</td><td class="celda-optima">18</td><td>24</td><td>25</td><td>26</td><td>28</td></tr>
+                            <tr><td>P2: Ing. Barrios</td><td>18</td><td>22</td><td class="celda-optima">24</td><td>25</td><td>26</td></tr>
+                            <tr><td>P3: Ing. Cifuentes</td><td>22</td><td class="celda-optima">18</td><td>20</td><td>24</td><td>25</td></tr>
+                            <tr><td>P4: Ing. Domínguez</td><td>24</td><td>18</td><td>22</td><td class="celda-optima">21</td><td>23</td></tr>
+                            <tr class="col-ficticia"><td>P5 (Ficticio)</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="celda-optima">0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="resultado-final">
+                    <strong>P1</strong> &rarr; M1 (18 hrs) &nbsp;&nbsp;|&nbsp;&nbsp; 
+                    <strong>P2</strong> &rarr; M3 (24 hrs) &nbsp;&nbsp;|&nbsp;&nbsp; 
+                    <strong>P3</strong> &rarr; M2 (18 hrs) &nbsp;&nbsp;|&nbsp;&nbsp; 
+                    <strong>P4</strong> &rarr; M4 (21 hrs) &nbsp;&nbsp;|&nbsp;&nbsp; 
+                    <strong>P5</strong> &rarr; M5 (0 hrs)
+
+                    <div class="resultado-z">Z = 18 + 24 + 18 + 21 + 0 = 81 Horas</div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- FIN TECHCORE -->
+
+    <!-- ================== EMPRESA 2: DATATARGET ================== -->
+    <div id="datatarget-section">
+        <div class="contenedor-principal">
+            <div class="logo-container">
+                <img src="Target.png" alt="DataTarget Logo">
+            </div>
+
+            <!-- SECCIÓN 1 DATATARGET -->
+            <div class="seccion-bloque">
+                <h2 class="titulo-seccion">1. Planteamiento: DataTarget Media & Analytics</h2>
+                <p><strong>Contexto de la Empresa:</strong> La agencia de estrategia digital DataTarget tiene a 5 consultores senior disponibles en su equipo base. Actualmente, acaban de cerrar contratos para 4 integraciones tecnológicas críticas.</p>
+                <p><strong>El Problema y Causas del Desbalance:</strong> Al haber más recursos que proyectos, se genera un desbalance (Matriz 5x4). Cada consultor tiene tarifas diferentes dependiendo de su especialización. Los costos están expresados en cientos de dólares (12 = $1,200). El consultor que quede asignado al "Proyecto Ficticio" se quedará en reserva estratégica esta semana.</p>
+                <p><strong>Objetivo del Modelo:</strong> Asignar exactamente un proyecto a cada consultor para minimizar el costo total de implementación.</p>
+            </div>
+            
+            <!-- SECCIÓN 2 DATATARGET -->
+            <div class="seccion-bloque">
+                <h2 class="titulo-seccion">2. Matriz Original de Costos (Cientos de $)</h2>
+                <div class="tabla-contenedor">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 20%;"><col style="width: 20%;"><col style="width: 20%;"><col style="width: 20%;"><col style="width: 20%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Consultor</th>
+                                <th>P1: DSP Programático</th>
+                                <th>P2: Machine Learning</th>
+                                <th>P3: Funnel Omnicanal</th>
+                                <th>P4: Auditoría GA4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>C1: Carlos</td><td>12</td><td>15</td><td>14</td><td>11</td></tr>
+                            <tr><td>C2: Gaby</td><td>13</td><td>14</td><td>12</td><td>15</td></tr>
+                            <tr><td>C3: Roberto</td><td>14</td><td>13</td><td>15</td><td>12</td></tr>
+                            <tr><td>C4: Sofía</td><td>11</td><td>16</td><td>13</td><td>14</td></tr>
+                            <tr><td>C5: Luis</td><td>15</td><td>12</td><td>11</td><td>13</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- SECCIÓN 3 DATATARGET -->
+            <div class="seccion-bloque">
+                <h2 class="titulo-seccion">3. Resolución por el Método Húngaro</h2>
+
+                <h3>Paso 1: Balanceo de Matriz (Columna Ficticia) y Paso 2: Reducción por Columnas</h3>
+                <p>Agregamos la columna P5 (Ficticio) con costos 0. Como todas las filas ya tienen un 0 al final, la reducción por filas no hace nada. Pasamos directamente a la <strong>reducción por columnas</strong>: restamos el valor mínimo de cada columna a los demás valores.</p>
+
+                <div class="tabla-contenedor" style="overflow: visible; padding-bottom: 30px;">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 20%;"><col style="width: 16%;"><col style="width: 16%;"><col style="width: 16%;"><col style="width: 16%;"><col style="width: 16%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Consultor</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5 (Ficticio)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>C1</td><td>12</td><td>15</td><td>14</td><td>11</td><td>0</td></tr>
+                            <tr><td>C2</td><td>13</td><td>14</td><td>12</td><td>15</td><td>0</td></tr>
+                            <tr><td>C3</td><td>14</td><td>13</td><td>15</td><td>12</td><td>0</td></tr>
+                            <tr><td>C4</td><td>11</td><td>16</td><td>13</td><td>14</td><td>0</td></tr>
+                            <tr><td>C5</td><td>15</td><td>12</td><td>11</td><td>13</td><td>0</td></tr>
+                            <tr class="col-ficticia" style="font-weight: bold; color: #d90429;">
+                                <td>Restar (Mínimo)</td>
+                                <td>-11</td><td>-12</td><td>-11</td><td>-11</td><td>-0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Iteración 1: Trazamos 4 líneas (Fila 1, Fila 4, Fila 5 y Columna 5)</h3>
+                <p>L = 4 (No es óptimo, necesitamos 5). Los valores no cubiertos están en C2 y C3. El valor mínimo no cubierto es 1. Restamos 1 a los valores no cubiertos y sumamos 1 a las intersecciones.</p>
+                <div class="tabla-contenedor">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 20%;"><col style="width: 16%;"><col style="width: 16%;"><col style="width: 16%;"><col style="width: 16%;"><col style="width: 16%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Consultor</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5 (Ficticio)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="linea-horizontal">C1</td><td class="linea-horizontal">1</td><td class="linea-horizontal">3</td><td class="linea-horizontal">3</td><td class="linea-horizontal">0</td><td class="linea-cruzada">0</td></tr>
+                            <tr><td>C2</td><td>2</td><td>2</td><td>1</td><td>4</td><td class="linea-vertical">0</td></tr>
+                            <tr><td>C3</td><td>3</td><td>1</td><td>4</td><td>1</td><td class="linea-vertical">0</td></tr>
+                            <tr><td class="linea-horizontal">C4</td><td class="linea-horizontal">0</td><td class="linea-horizontal">4</td><td class="linea-horizontal">2</td><td class="linea-horizontal">3</td><td class="linea-cruzada">0</td></tr>
+                            <tr><td class="linea-horizontal">C5</td><td class="linea-horizontal">4</td><td class="linea-horizontal">0</td><td class="linea-horizontal">0</td><td class="linea-horizontal">2</td><td class="linea-cruzada">0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 4 DATATARGET -->
+            <div class="seccion-bloque">
+                <h2 class="titulo-seccion">4. Solución Óptima y Asignación</h2>
+
+                <h3>Matriz Final Óptima: Elegimos los Ceros</h3>
+                <p>Al intentar tapar los ceros de esta nueva matriz, se necesitan exactamente 5 líneas, confirmando que hemos llegado a la solución óptima.</p>
+                <div class="tabla-contenedor">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 20%;"><col style="width: 16%;"><col style="width: 16%;"><col style="width: 16%;"><col style="width: 16%;"><col style="width: 16%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Consultor</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>C1</td><td>1</td><td>3</td><td>3</td><td class="celda-optima">0</td><td>1</td></tr>
+                            <tr><td>C2</td><td>1</td><td>1</td><td class="celda-optima">0</td><td>3</td><td>0</td></tr>
+                            <tr><td>C3</td><td>2</td><td>0</td><td>3</td><td>0</td><td class="celda-optima">0</td></tr>
+                            <tr><td>C4</td><td class="celda-optima">0</td><td>4</td><td>2</td><td>3</td><td>1</td></tr>
+                            <tr><td>C5</td><td>4</td><td class="celda-optima">0</td><td>0</td><td>2</td><td>1</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Asignación de Costos en Matriz Original</h3>
+                <div class="tabla-contenedor">
+                    <table class="tabla-estilizada">
+                        <colgroup>
+                            <col style="width: 20%;"><col style="width: 16%;"><col style="width: 16%;"><col style="width: 16%;"><col style="width: 16%;"><col style="width: 16%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-principal">
+                                <th>Consultor</th>
+                                <th>P1: DSP Programático</th>
+                                <th>P2: Machine Learning</th>
+                                <th>P3: Funnel Omnicanal</th>
+                                <th>P4: Auditoría GA4</th>
+                                <th>P5 (Ficticio)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>C1: Carlos</td><td>12</td><td>15</td><td>14</td><td class="celda-optima">11</td><td>0</td></tr>
+                            <tr><td>C2: Gaby</td><td>13</td><td>14</td><td class="celda-optima">12</td><td>15</td><td>0</td></tr>
+                            <tr><td>C3: Roberto</td><td>14</td><td>13</td><td>15</td><td>12</td><td class="celda-optima">0</td></tr>
+                            <tr><td>C4: Sofía</td><td class="celda-optima">11</td><td>16</td><td>13</td><td>14</td><td>0</td></tr>
+                            <tr><td>C5: Luis</td><td>15</td><td class="celda-optima">12</td><td>11</td><td>13</td><td>0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="resultado-final">
+                    <strong>C1</strong> &rarr; P4 ($1,100) &nbsp;&nbsp;|&nbsp;&nbsp; 
+                    <strong>C2</strong> &rarr; P3 ($1,200) &nbsp;&nbsp;|&nbsp;&nbsp; 
+                    <strong>C3</strong> &rarr; P5 ($0 - Reserva) &nbsp;&nbsp;|&nbsp;&nbsp; 
+                    <strong>C4</strong> &rarr; P1 ($1,100) &nbsp;&nbsp;|&nbsp;&nbsp; 
+                    <strong>C5</strong> &rarr; P2 ($1,200)
+
+                    <div class="resultado-z">Costo Total de Integración (Z) = (46) $4,600</div>
+                </div>
+            </div>
+
+        </div>
+    </div> <!-- FIN DATATARGET -->
+</body>
+</html>

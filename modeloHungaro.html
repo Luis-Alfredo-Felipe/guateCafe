@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Húngaro - GuateCafé</title>
+    <!-- Hoja de estilos compartida -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>MÉTODO HÚNGARO</h1>
+        <h2>El método húngaro es un algoritmo de investigación de operaciones diseñado para resolver problemas de asignación (asignar <em>n</em> recursos a <em>n</em> tareas, uno a uno) buscando el menor costo o tiempo posible. El Método Húngaro también se conoce como el método de la matriz de costos o el método de los ceros</h2>
+    </header>
+
+        <div class="container">
+            <div class="seccion-bloque">
+                <h2 class="titulo-seccion">Reglas clave</h2>
+                <ul>
+                    <li><strong>Matriz cuadrada:</strong> El número de filas (recursos) debe ser igual al de columnas (tareas). Si no, se añaden filas o columnas ficticias con costo cero.</li>
+                    <li><strong>Maximización:</strong> Si el problema busca maximizar, se convierte a minimización restando todos los valores de la matriz al número más grande de esta.</li>
+                </ul>
+            
+                <h2 class="titulo-seccion">Pasos en 3 líneas</h2>
+                <ul>
+                    <li><strong>Restar mínimos:</strong> Resta el número menor de cada fila a su propia fila; luego, haz lo mismo con el menor de cada columna a su propia columna.</li>
+                    <li><strong>Trazar líneas:</strong> Cubre todos los ceros usando la menor cantidad posible de líneas horizontales y verticales. Si el número de líneas es igual al tamaño de la matriz (<em>n</em>), el problema está resuelto.</li>
+                    <li><strong>Ajustar (si faltan líneas):</strong> Si las líneas son menos que <em>n</em>, busca el número menor no cubierto: réstalo a los elementos libres y súmalo a las intersecciones de las líneas. Repite el paso 2.</li>
+                </ul>
+            </div>
+
+            <!-- PASO 1 -->
+            <h1 class="paso-badge-titulo">EJEMPLO DE APLICACIÓN MÉTODO HÚNGARO</h1>
+            <br>
+            <div class="seccion-bloque">
+                <span class="paso-badge">PASO 1</span>
+                <h3>Matriz Original de Tiempos</h3>
+                <p>Para esta demostración, se tiene que distribuir en total 4 postulantes a 3 puestos que quedaron vacantes para la operación de 3 Máquinas en nuestra empresa <strong>GUATECAFE</strong>. Los resultados representan los tiempos en minutos de operación de cada postulante en cada máquina. Es un caso de MINIMIZAR porque son tiempos de operación</p>
+            </div>
+            <div class="tabla-contenedor">
+            <!-- Agregamos "tabla-hungaro" al lado de tu clase base -->
+            <table class="tabla-estilizada tabla-hungaro">
+                <thead>
+                    <tr class="fila-super-header">
+                        <th class="th-vacio"></th>
+                        <!-- Agregamos colspan="3" para que ocupe el espacio del cuadro rojo -->
+                        <th colspan="3" class="th-estaciones-blanco">ESTACIONES</th>
+                    </tr>
+                        <tr class="fila-principal">
+                        <th>Baristas</th>
+                        <th>M1 (Espresso)</th>
+                        <th>M2 (Filtro V60)</th>
+                        <th>M3 (Tostadora)</th>
+                    </tr>
+                 </thead>
+                <!-- Aquí sigue tu tbody normal... -->
+                <tbody>
+                    <tr>
+                        <td><strong>Barista 1 (B1)</strong></td>
+                        <td>12</td>
+                        <td>9</td>
+                        <td>11</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Barista 2 (B2)</strong></td>
+                        <td>8</td>
+                        <td>6</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Barista 3 (B3)</strong></td>
+                        <td>14</td>
+                        <td>7</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Barista 4 (B4)</strong></td>
+                        <td>10</td>
+                        <td>8</td>
+                        <td>13</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PASO 2 -->
+        <div class="seccion-bloque">
+            <span class="paso-badge">PASO 2</span>
+            <h3>Balance de la Matriz (m = n)</h3>
+            <div class="alerta-desbalance">
+                Para equilibrar la matriz de dimensión 4 x 3, se agrega la columna ficticia <strong>M4 (Ficticia)</strong> con costos de 0. Posterior a esto, identificamos el menor elemento por columna para restar: M1 (8), M2 (6), M3 (5), M4 (0).
+            </div>
+
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada">
+                    <thead>
+                        <tr>
+                            <th>Baristas / Estaciones</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                            <th class="col-ficticia">M4 (Ficticia)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>B1</strong></td>
+                            <td>12</td>
+                            <td>9</td>
+                            <td>11</td>
+                            <td class="col-ficticia celda-cero">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B2</strong></td>
+                            <td>8</td>
+                            <td>6</td>
+                            <td>15</td>
+                            <td class="col-ficticia celda-cero">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B3</strong></td>
+                            <td>14</td>
+                            <td>7</td>
+                            <td>5</td>
+                            <td class="col-ficticia celda-cero">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B4</strong></td>
+                            <td>10</td>
+                            <td>8</td>
+                            <td>13</td>
+                            <td class="col-ficticia celda-cero">0</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Restar Mínimo:</strong></td>
+                            <td class="operacion-resaltada">8</td>
+                            <td class="operacion-resaltada">6</td>
+                            <td class="operacion-resaltada">5</td>
+                            <td class="operacion-resaltada">0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- PASO 3 -->
+        <div class="seccion-bloque">
+            <span class="paso-badge">PASO 3</span>
+            <h3>Reducción de Filas y Columnas</h3>
+            <p>Resultado de restar los mínimos de columna a cada celda correspondiente:</p>
+
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada">
+                    <thead>
+                        <tr>
+                            <th>Baristas / Estaciones</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                            <th class="col-ficticia">M4 (Ficticia)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>B1</strong></td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>6</td>
+                            <td class="col-ficticia celda-cero">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B2</strong></td>
+                            <td class="celda-cero">0</td>
+                            <td class="celda-cero">0</td>
+                            <td>10</td>
+                            <td class="col-ficticia celda-cero">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B3</strong></td>
+                            <td>6</td>
+                            <td>1</td>
+                            <td class="celda-cero">0</td>
+                            <td class="col-ficticia celda-cero">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B4</strong></td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>8</td>
+                            <td class="col-ficticia celda-cero">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PASO 4 -->
+        <div class="seccion-bloque">
+            <span class="paso-badge">PASO 4</span>
+            <h3>Prueba de Optimalidad #1 (Trazado de Líneas Mínimas)</h3>
+            <p>Se trazan 3 líneas para cubrir todos los ceros de la matriz (3 - 1 = 2 líneas: Fila B2, Fila B3, Columna M4).</p>
+        
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada">
+                    <thead>
+                        <tr>
+                            <th>Baristas / Estaciones</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                            <th>M4 (Línea M4)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>B1</strong></td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>6</td>
+                            <td class="linea-vertical">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B2 (Línea B2)</strong></td>
+                            <td class="linea-horizontal">0</td>
+                            <td class="linea-horizontal">0</td>
+                            <td class="linea-horizontal">10</td>
+                            <td class="linea-cruzada">0 (Intersección)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B3 (Línea B3)</strong></td>
+                            <td class="linea-horizontal">6</td>
+                            <td class="linea-horizontal">1</td>
+                            <td class="linea-horizontal">0</td>
+                            <td class="linea-cruzada">0 (Intersección)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B4</strong></td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>8</td>
+                            <td class="linea-vertical">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- BLOQUE HTML: PASO 5 -->
+        <!-- ========================================== -->
+        <div class="seccion-bloque">
+            <span class="paso-badge">PASO 5</span>
+            <h3 class="titulo-paso">Ajuste de la Matriz Reducida</h3>
+            <p class="descripcion-paso">
+                Identificamos el menor elemento no cubierto por las líneas: k = 2.<br>
+                - Se restan los elementos no cubiertos por 2.<br>
+                - Se suman los elementos en las 2 intersecciones (celdas B2-M4 y B3-M4) por 2.
+            </p>
+        
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada">
+                    <thead>
+                        <tr>
+                            <th>Baristas / Estaciones</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                            <th>M4</th>
+                            <th>Ajuste de Filas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="barista-label">B1</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>6</td>
+                            <td>0</td>
+                            <td class="ajuste-resta">- 2</td>
+                        </tr>
+                        <tr>
+                            <td class="barista-label">B2</td>
+                            <td><span class="badge-cero">0</span></td>
+                            <td><span class="badge-cero">0</span></td>
+                            <td>10</td>
+                            <td><span class="badge-interseccion">2</span></td>
+                            <td class="ajuste-neutro">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td class="barista-label">B3</td>
+                            <td>6</td>
+                            <td>1</td>
+                            <td><span class="badge-cero">0</span></td>
+                            <td><span class="badge-interseccion">2</span></td>
+                            <td class="ajuste-neutro">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td class="barista-label">B4</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>8</td>
+                            <td>0</td>
+                            <td class="ajuste-resta">- 2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="descripcion-paso">
+                Después de ajustar la matriz, se vuelve a trazar líneas para cubrir todos los ceros. Si el número de líneas es igual al tamaño de la matriz (4), se ha encontrado la solución óptima.
+            </p>
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada">
+                    <thead>
+                        <tr>
+                            <th>Baristas / Estaciones</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                            <th>M4</th>
+                            <th>Ajuste de Filas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="barista-label">B1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td class="ajuste-resta">- 2</td>
+                        </tr>
+                        <tr>
+                            <td class="barista-label">B2</td>
+                            <td><span class="badge-cero">0</span></td>
+                            <td><span class="badge-cero">0</span></td>
+                            <td>10</td>
+                            <td><span class="badge-interseccion">2</span></td>
+                            <td class="ajuste-neutro">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td class="barista-label">B3</td>
+                            <td>6</td>
+                            <td>1</td>
+                            <td><span class="badge-cero">0</span></td>
+                            <td><span class="badge-interseccion">2</span></td>
+                            <td class="ajuste-neutro">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td class="barista-label">B4</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>6</td>
+                            <td>0</td>
+                            <td class="ajuste-resta">- 2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SOLUCIONES ÓPTIMAS -->
+        <div class="seccion-bloque">
+            <span class="paso-badge">PASO 6</span>
+            <h3>Soluciones Óptimas del Sistema</h3>
+
+            <!-- OPCIÓN 1 -->
+            <div style="margin-bottom: 35px;">
+                <h4 style="color: var(--verde-hoja); border-bottom: 2px solid var(--verde-hoja); padding-bottom: 5px;">
+                    Matriz Óptima - Opción 1
+                </h4>
+
+                <div class="tabla-contenedor">
+    
+                <!-- TABLA 1: Matriz Óptima -->
+                <!-- Se agrega table-layout: fixed para forzar anchos exactos -->
+                <table class="tabla-estilizada" style="table-layout: fixed; width: 100%;">
+                    <!-- Colgroup garantiza que ambas tablas compartan las mismas proporciones -->
+                    <colgroup>
+                        <col style="width: 28%;">
+                        <col style="width: 18%;">
+                        <col style="width: 18%;">
+                        <col style="width: 18%;">
+                        <col style="width: 18%;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Baristas / Estaciones</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                            <th class="col-ficticia">M4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>B1</strong></td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>4</td>
+                            <td class="celda-optima">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B2</strong></td>
+                            <td>0</td>
+                            <td class="celda-optima">0</td>
+                            <td>10</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B3</strong></td>
+                            <td>6</td>
+                            <td>1</td>
+                            <td class="celda-optima">0</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B4</strong></td>
+                            <td class="celda-optima">0</td>
+                            <td>0</td>
+                            <td>6</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br> <!-- Espacio visual entre las dos tablas -->
+                <!-- TABLA 2: Tiempos Originales con Asignaciones -->
+                <table class="tabla-estilizada tabla-hungaro" style="table-layout: fixed; width: 100%;">
+                    <!-- Mismo colgroup para alinear columnas con la Tabla 1 -->
+                    <colgroup>
+                        <col style="width: 28%;">
+                        <col style="width: 18%;">
+                        <col style="width: 18%;">
+                        <col style="width: 18%;">
+                        <col style="width: 18%;">
+                    </colgroup>
+                    <thead>
+                        <tr class="fila-super-header">
+                            <th class="th-vacio"></th>
+                            <!-- Se cambió colspan="4" porque ahora hay 4 máquinas (M1, M2, M3, M4) -->
+                            <th colspan="4" class="th-estaciones-blanco">ESTACIONES</th>
+                        </tr>
+                        <tr class="fila-principal">
+                            <th>Baristas</th>
+                            <th>M1 (Espresso)</th>
+                            <th>M2 (Filtro V60)</th>
+                            <th>M3 (Tostadora)</th>
+                            <!-- Columna M4 agregada para igualar a la tabla superior -->
+                            <th>M4 (Ficticia)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Barista 1 (B1)</strong></td>
+                            <td>12</td>
+                            <td>9</td>
+                            <td>11</td>
+                            <!-- Celda óptima agregada y columna M4 -->
+                            <td class="celda-optima">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Barista 2 (B2)</strong></td>
+                            <td>8</td>
+                            <!-- Celda óptima aplicada al tiempo real -->
+                            <td class="celda-optima">6</td>
+                            <td>15</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Barista 3 (B3)</strong></td>
+                            <td>14</td>
+                            <td>7</td>
+                            <!-- Celda óptima aplicada al tiempo real -->
+                            <td class="celda-optima">5</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Barista 4 (B4)</strong></td>
+                            <!-- Celda óptima aplicada al tiempo real -->
+                            <td class="celda-optima">10</td>
+                            <td>8</td>
+                            <td>13</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+                <div class="caja-calculo">
+                    <h4>Asignación Opción 1 (Tiempos Reales)</h4>
+                        <p style="text-align: center; font-size: 1.15rem; color: #333; margin: 15px 0; line-height: 1.8;">
+                            <strong>B1</strong> &rarr; M4 (0 min) &nbsp;&nbsp;|&nbsp;&nbsp;
+                            <strong>B2</strong> &rarr; M2 (6 min) &nbsp;&nbsp;|&nbsp;&nbsp;
+                            <strong>B3</strong> &rarr; M3 (5 min) &nbsp;&nbsp;|&nbsp;&nbsp;
+                            <strong>B4</strong> &rarr; M1 (10 min)
+                        </p>
+                    <div class="resultado-z">
+                        Tiempo Operativo Mínimo Total (Z) = 0 + 6 + 5 + 10 = 21 Minutos
+                    </div>
+                </div>
+            </div>
+
+            <!-- OPCIÓN 2 -->
+            <div>
+                <h4 style="color: var(--verde-hoja); border-bottom: 2px solid var(--verde-hoja); padding-bottom: 5px;">
+                    Matriz Óptima - Opción 2
+                </h4>
+                <div class="tabla-contenedor">    
+                    <!-- TABLA 1: Matriz Óptima - Opción 2 -->
+                    <table class="tabla-estilizada" style="table-layout: fixed; width: 100%;">
+                        <colgroup>
+                            <col style="width: 28%;">
+                            <col style="width: 18%;">
+                            <col style="width: 18%;">
+                            <col style="width: 18%;">
+                            <col style="width: 18%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Baristas / Estaciones</th>
+                                <th>M1</th>
+                                <th>M2</th>
+                                <th>M3</th>
+                                <th class="col-ficticia">M4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>B1</strong></td>
+                                <td>2</td>
+                                <td>1</td>
+                                <td>4</td>
+                                <!-- Sombreado en M4 -->
+                                <td class="celda-optima">0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>B2</strong></td>
+                                <!-- Sombreado en M1 -->
+                                <td class="celda-optima">0</td>
+                                <td>0</td>
+                                <td>10</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td><strong>B3</strong></td>
+                                <td>6</td>
+                                <td>1</td>
+                                <!-- Sombreado en M3 -->
+                                <td class="celda-optima">0</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td><strong>B4</strong></td>
+                                <td>0</td>
+                                <!-- Sombreado en M2 -->
+                                <td class="celda-optima">0</td>
+                                <td>6</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>                
+                    <br>
+                    <!-- TABLA 2: Tiempos Originales - Opción 2 -->
+                    <table class="tabla-estilizada tabla-hungaro" style="table-layout: fixed; width: 100%;">
+                        <colgroup>
+                            <col style="width: 28%;">
+                            <col style="width: 18%;">
+                            <col style="width: 18%;">
+                            <col style="width: 18%;">
+                            <col style="width: 18%;">
+                        </colgroup>
+                        <thead>
+                            <tr class="fila-super-header">
+                                <th class="th-vacio"></th>
+                                <th colspan="4" class="th-estaciones-blanco">ESTACIONES</th>
+                            </tr>
+                            <tr class="fila-principal">
+                                <th>Baristas</th>
+                                <th>M1 (Espresso)</th>
+                                <th>M2 (Filtro V60)</th>
+                                <th>M3 (Tostadora)</th>
+                                <th>M4 (Ficticia)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Barista 1 (B1)</strong></td>
+                                <td>12</td>
+                                <td>9</td>
+                                <td>11</td>
+                                <!-- Sombreado en M4 -->
+                                <td class="celda-optima">0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Barista 2 (B2)</strong></td>
+                                <!-- Sombreado en M1 (Valor original: 8) -->
+                                <td class="celda-optima">8</td>
+                                <td>6</td>
+                                <td>15</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Barista 3 (B3)</strong></td>
+                                <td>14</td>
+                                <td>7</td>
+                                <!-- Sombreado en M3 (Valor original: 5) -->
+                                <td class="celda-optima">5</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Barista 4 (B4)</strong></td>
+                                <td>10</td>
+                                <!-- Sombreado en M2 (Valor original: 8) -->
+                                <td class="celda-optima">8</td>
+                                <td>13</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="caja-calculo">
+                    <h4>Asignación Opción 2 (Tiempos Reales)</h4>
+                    <p style="text-align: center; font-size: 1.15rem; color: #333; margin: 15px 0; line-height: 1.8;">
+                        <strong>B1</strong> &rarr; M4 (0 min) &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <strong>B2</strong> &rarr; M1 (8 min) &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <strong>B3</strong> &rarr; M3 (5 min) &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <strong>B4</strong> &rarr; M2 (8 min)
+                    </p>
+                    <div class="resultado-z">
+                        Tiempo Operativo Mínimo Total (Z) = 0 + 8 + 5 + 8 = 21 Minutos
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+        <!-- Enlace a tu archivo JavaScript -->
+    <script src="script.js"></script>
+
+        <!-- FOOTER CON ÍCONOS REALES SVG -->
+    <footer class="footer-contenedor-full">
+        <div class="tarjeta-footer-full">
+            <h4 class="titulo-tarjeta">Síguenos en nuestras redes sociales</h4>
+
+            <div class="enlaces-bloque">
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/luisalfredo.felipesic/" target="_blank" class="item-red">
+                    <svg class="icono-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    Facebook
+                </a>
+
+                <!-- Gmail -->
+                <a href="mailto:genttilez@gmail.com|" class="item-red">
+                    <svg class="icono-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.272H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L12 9.545l8.073-6.052c1.618-1.214 3.927-.059 3.927 1.964z"/></svg>
+                    Gmail
+                </a>
+
+                <!-- YouTube -->
+                <a href="https://youtube.com/@luis_alfredo_felipe_sic?si=j6NclONuBQlIggoy" target="_blank" class="item-red">
+                    <svg class="icono-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    YouTube
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/Luis-Alfredo-Felipe" target="_blank" class="item-red">
+                    <svg class="icono-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+
+            <p class="subtexto-footer">Optimización y Análisis de Rutas de Transporte | GuateCafé</p>
+        </div>
+    </footer>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuateCafé - Método Húngaro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ENCABEZADO DE LA PÁGINA -->
+    <header id="inicio" style="position: relative;">
+        <div class="logo-container">
+            <img src="Logo.png" alt="Logo GuateCafé">
+        </div>
+        <h1>GuateCafé</h1>
+        <h2>Distribuidora de Café - Buen café, grandes historias</h2>
+
+        <!-- Menú Hamburguesa -->
+        <nav id="menu-exclusivo-inicio">
+            <div class="icono-rayas">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="panel-cristal">
+                <div class="dropdown">
+                    <button class="dropbtn">MODELO DE TRANSPORTE NOROESTE▼</button>
+                    <div class="dropdown-content">
+                        <a href="index.html#matriz-costos">Matriz Inicial</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">MODELO DE TRANSPORTE COSTO MINIMO▼</button>
+                    <div class="dropdown-content">
+                        <a href="costoMinimo.html#matriz-inicial">Matriz Inicial</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">MODELO DE TRANSPORTE METODO DE VOGEL ▼</button>
+                    <div class="dropdown-content">
+                        <a href="metodoVogel.html#matriz-inicial">Matriz Inicial</a>
+                    </div>
+                </div>
+                <!-- NUEVO BOTÓN PARA MÉTODO HÚNGARO -->
+                <div class="dropdown">
+                    <button class="dropbtn">MODELO DE ASIGNACIÓN HÚNGARO ▼</button>
+                    <div class="dropdown-content">
+                        <a href="#planteamiento">Planteamiento (Ejemplo 1)</a>
+                        <a href="#fase1">Primera Fase</a>
+                        <a href="#fase2">Segunda Fase</a>
+                        <a href="#tabla-optima">Tabla Óptima y Resultados</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="container">
+
+        <!-- SECCIÓN 1: PLANTEAMIENTO -->
+        <section id="planteamiento" class="seccion-bloque">
+            <h3><a href="#inicio" class="titulo-enlace">1. Planteamiento del Problema (Minimización)</a></h3>
+            <p>
+                Para esta demostración, se tiene que distribuir en total 4 postulantes a 3 puestos que quedaron vacantes para la operación de 3 Máquinas[cite: 1]. Los resultados representan los tiempos en minutos de operación de cada postulante en cada máquina[cite: 1]. Es un caso de MINIMIZAR porque son tiempos de operación[cite: 1].
+            </p>
+            
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada">
+                    <thead>
+                        <tr>
+                            <th>Postulantes / Maquinarias</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>P1</strong></td><td>10</td><td>8</td><td>9</td></tr>
+                        <tr><td><strong>P2</strong></td><td>7</td><td>5</td><td>14</td></tr>
+                        <tr><td><strong>P3</strong></td><td>11</td><td>6</td><td>4</td></tr>
+                        <tr><td><strong>P4</strong></td><td>9</td><td>7</td><td>12</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alerta-desbalance">
+                <strong>Balanceo del Modelo:</strong> Lo primero que se debe verificar es que el modelo esté balanceado, lo que implica que la cantidad de filas debe ser igual a la cantidad de columnas[cite: 1]. Como hay 4 postulantes y 3 máquinas, se debe crear una Máquina Ficticia (MF) con costo cero[cite: 1].
+            </div>
+            
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada">
+                    <thead>
+                        <tr>
+                            <th>Postulantes / Maquinarias</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                            <th class="col-oferta">MF (Ficticia)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>P1</strong></td><td>10</td><td>8</td><td>9</td><td class="col-oferta">0</td></tr>
+                        <tr><td><strong>P2</strong></td><td>7</td><td>5</td><td>14</td><td class="col-oferta">0</td></tr>
+                        <tr><td><strong>P3</strong></td><td>11</td><td>6</td><td>4</td><td class="col-oferta">0</td></tr>
+                        <tr><td><strong>P4</strong></td><td>9</td><td>7</td><td>12</td><td class="col-oferta">0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: PRIMERA FASE -->
+        <section id="fase1" class="seccion-bloque">
+            <h3><a href="#inicio" class="titulo-enlace">2. Primera Fase: Reducción de Filas y Columnas</a></h3>
+            <p>
+                El objetivo consiste en hallar al menos un cero en cada fila y cada columna de la tabla de asignación[cite: 2]. Primero ubicamos el menor valor de cada fila y lo restamos. En este caso, el menor de todas las filas es 0 (gracias a la MF), por lo que quedan igual[cite: 2]. Luego, restamos el menor valor de cada columna a su respectiva columna[cite: 2].
+            </p>
+            <ul>
+                <li><strong>Mínimos por Columna:</strong> M1=7, M2=5, M3=4, MF=0[cite: 2].</li>
+            </ul>
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada tabla-matriz">
+                    <thead>
+                        <tr>
+                            <th>P / M</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                            <th class="col-oferta">MF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>P1</strong></td><td>3</td><td>3</td><td>5</td><td class="col-oferta">0</td></tr>
+                        <tr><td><strong>P2</strong></td><td>0</td><td>0</td><td>10</td><td class="col-oferta">0</td></tr>
+                        <tr><td><strong>P3</strong></td><td>4</td><td>1</td><td>0</td><td class="col-oferta">0</td></tr>
+                        <tr><td><strong>P4</strong></td><td>2</td><td>2</td><td>8</td><td class="col-oferta">0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: SEGUNDA FASE -->
+        <section id="fase2" class="seccion-bloque">
+            <h3><a href="#inicio" class="titulo-enlace">3. Segunda Fase: Trazado de Líneas y Ajuste</a></h3>
+            <p>
+                Se debe cubrir los ceros con líneas horizontales y verticales; el número de líneas debe ser el menor posible[cite: 2]. Como se lograron 3 líneas (n-1) en una matriz 4x4, aún no es una asignación óptima[cite: 2].
+            </p>
+            <p>
+                <strong>Ajuste:</strong> De los elementos libres, elegir el menor (que es 2)[cite: 2]. Restar a los elementos libres y sumar a las intersecciones[cite: 2].
+            </p>
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada tabla-matriz">
+                    <thead>
+                        <tr>
+                            <th>P / M</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                            <th class="col-oferta">MF (Línea V)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>P1</strong></td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>5</td>
+                            <td class="tachado-v col-oferta">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>P2 (Línea H)</strong></td>
+                            <td class="tachado-h">0</td>
+                            <td class="tachado-h">0</td>
+                            <td class="tachado-h">10</td>
+                            <td class="tachado-cruz col-oferta">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>P3 (Línea H)</strong></td>
+                            <td class="tachado-h">4</td>
+                            <td class="tachado-h">1</td>
+                            <td class="tachado-h">0</td>
+                            <td class="tachado-cruz col-oferta">0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>P4</strong></td>
+                            <td class="celda-destacada">2</td> <!-- Elemento menor libre -->
+                            <td>2</td>
+                            <td>8</td>
+                            <td class="tachado-v col-oferta">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: TABLA ÓPTIMA -->
+        <section id="tabla-optima" class="seccion-bloque">
+            <h3><a href="#inicio" class="titulo-enlace">4. Tabla ÓPTIMA y Resultados</a></h3>
+            <p>
+                Cada postulante tiene asignado en qué máquina debe trabajar y el tiempo que le toma realizar cada actividad[cite: 3].
+            </p>
+            <div class="tabla-contenedor">
+                <table class="tabla-estilizada tabla-matriz">
+                    <thead>
+                        <tr>
+                            <th>P / M</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                            <th class="col-oferta">MF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>P1</strong></td><td>1</td><td>1</td><td>3</td><td class="col-oferta"><span class="asignacion-final">0</span></td></tr>
+                        <tr><td><strong>P2</strong></td><td><span class="asignacion-final">0</span></td><td>0</td><td>10</td><td class="col-oferta">2</td></tr>
+                        <tr><td><strong>P3</strong></td><td>4</td><td>1</td><td><span class="asignacion-final">0</span></td><td class="col-oferta">2</td></tr>
+                        <tr><td><strong>P4</strong></td><td>0</td><td><span class="asignacion-final">0</span></td><td>6</td><td class="col-oferta">0</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="caja-calculo">
+                <h4>Resultados Tabla Óptima</h4>
+                <p class="formula">P1 a MF = 0</p>
+                <p class="formula">P2 a M1 = 7</p>
+                <p class="formula">P3 a M3 = 4</p>
+                <p class="formula">P4 a M2 = 7</p>
+                <p class="resultado-z">Total = 18 Minutos[cite: 3]</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-contenedor-full">
+        <!-- Reutiliza el mismo footer de tu index.html aquí -->
+        <div class="tarjeta-footer-full">
+            <h4 class="titulo-tarjeta">Síguenos en nuestras redes sociales</h4>
+            <p class="subtexto-footer">Optimización y Análisis | GuateCafé</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investigación de Operaciones - Menú Principal</title>
+    <!-- Importamos FontAwesome para los íconos de los botones y redes sociales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ================= RESET BÁSICO ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* ================= CONTENEDOR DEL VIDEO DE FONDO ================= */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            overflow: hidden;
+            background: #000;
+        }
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ================= CAPA OSCURA SOBRE EL VIDEO ================= */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 15, 30, 0.6);
+            z-index: -1;
+        }
+
+        /* ================= ESTRUCTURA FLEX ================= */
+        .layout-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+
+        /* ================= ENCABEZADO (HEADER) ================= */
+        .header {
+            text-align: center;
+            padding: 25px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(0, 168, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 15px #00a8ff, 0 0 30px #00a8ff;
+        }
+
+        /* ================= CONTENIDO CENTRAL ================= */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .button-container {
+            display: flex;
+            gap: 200px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ================= DISEÑO BASE DE LOS BOTONES ================= */
+        .btn-base {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 250px;
+            height: 180px;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            padding: 20px;
+        }
+        .btn-base i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        /* 1. BOTÓN AMARILLO (Enunciado) */
+        .btn-amarillo {
+            color: #ffcc00;
+            background: rgba(255, 204, 0, 0.15);
+            border: 2px solid #ffcc00;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+        }
+        .btn-amarillo i { color: #ffcc00; }
+        .btn-amarillo:hover {
+            background: rgba(255, 204, 0, 0.3);
+            color: #ffffff;
+            box-shadow: 0 0 30px #ffcc00, inset 0 0 15px rgba(255, 255, 255, 0.6);
+            transform: translateY(-5px);
+        }
+        .btn-amarillo:hover i { color: #ffffff; transform: scale(1.1); }
+
+        /* 2. BOTÓN CELESTE (Estilo TechCore) */
+        .btn-cyan {
+            color: #00d2ff;
+            background: rgba(0, 210, 255, 0.15);
+            border: 2px solid #00d2ff;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+        }
+        .btn-cyan i { color: #00d2ff; }
+        .btn-cyan:hover {
+            background: rgba(0, 210, 255, 0.3);
+            color: #ffffff;
+            box-shadow: 0 0 30px #00d2ff, inset 0 0 15px rgba(255, 255, 255, 0.6);
+            transform: translateY(-5px);
+        }
+        .btn-cyan:hover i { color: #ffffff; transform: scale(1.1); }
+
+        /* 3. BOTÓN ROJO (YouTube) */
+        .btn-rojo {
+            color: #ff0000;
+            background: rgba(255, 0, 0, 0.15);
+            border: 2px solid #ff0000;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+        }
+        .btn-rojo i { color: #ff0000; }
+        .btn-rojo:hover {
+            background: rgba(255, 0, 0, 0.3);
+            color: #ffffff;
+            box-shadow: 0 0 30px #ff0000, inset 0 0 15px rgba(255, 255, 255, 0.6);
+            transform: translateY(-5px);
+        }
+        .btn-rojo:hover i { color: #ffffff; transform: scale(1.1); }
+
+        /* ================= PIE DE PÁGINA (FOOTER) ================= */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(0, 168, 255, 0.3);
+        }
+        .social-links {
+            margin-bottom: 10px;
+        }
+        .social-links a {
+            display: inline-block;
+            color: #00a8ff;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+        .social-links a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px #00a8ff;
+            transform: scale(1.2);
+        }
+        .footer p {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* ================= RESPONSIVO (Móviles) ================= */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.5rem; }
+            .btn-base { width: 100%; max-width: 300px; height: 120px; flex-direction: row; gap: 15px; }
+            .btn-base i { margin-bottom: 0; font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- VIDEO DE FONDO -->
+    <div class="video-background">
+        <!-- Verifica que tu video se llame así en tu carpeta -->
+        <video autoplay loop muted playsinline>
+            <source src="fondo.mp4" type="video/mp4">
+            Tu navegador no soporta videos HTML5.
+        </video>
+    </div>
+    
+    <!-- CAPA OSCURA -->
+    <div class="video-overlay"></div>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="layout-wrapper">
+        
+        <!-- ENCABEZADO -->
+        <header class="header">
+            <h1>Investigación de Operaciones - Método Húngaro</h1>
+        </header>
+
+        <!-- CENTRO CON LOS 3 BOTONES -->
+        <main class="main-content">
+            <div class="button-container">
+                
+                <!-- BOTÓN 1: Enunciado (Amarillo) -->
+                <a href="modeloHungaro.html" class="btn-base btn-amarillo" target="_blank">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Enunciado del<br>Método Húngaro</span>
+                </a>
+
+                <!-- BOTÓN 2: Las Empresas (Celeste) -->
+                <a href="tech.html" class="btn-base btn-cyan" target="_blank">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Método Húngaro<br>Casos Corporativos</span>
+                </a>
+
+                <!-- BOTÓN 3: YouTube (Rojo) -->
+                <a href="https://youtu.be/vuTfr-3KGTw?si=7I0AKDgmj7iKZmjb" target="_blank" class="btn-base btn-rojo">
+                    <i class="fab fa-youtube"></i>
+                    <span>Método Húngaro<br>(Luis @lfredo)</span>
+                </a>
+
+            </div>
+        </main>
+
+        <!-- FOOTER / PIE DE PÁGINA -->
+        <footer class="footer">
+            <div class="social-links">
+                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+            <p>&copy; 2026 - Proyecto Final: Método Húngaro | Diseñado para la clase de Investigación de Operaciones | Ing. Erick Jímenez </p>
+        </footer>
+    </div>
+</body>
+</html>

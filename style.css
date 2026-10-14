@@ -291,15 +291,15 @@ h3.sin-borde {
 
 .alerta-desbalance {
     margin-top: 15px;
-    background-color: rgba(193, 18, 31, 0.15); /* Fondo rojizo suave */
+    background-color: rgba(255, 244, 212); /* Fondo rojizo suave */
     border: 1px solid var(--rojo-cereza);
     padding: 15px;
     border-radius: 6px;
-    color: var(--rojo-cereza);
+    color: var(--cafe-oscuro);
 }
 
 /* =========================================
-   MATRIZ DE TRANSPORTE
+MATRIZ DE TRANSPORTE
    ========================================= */
 .tabla-matriz th, .tabla-matriz td {
     border: 1px solid #ccc; /* Agregamos bordes para que parezca cuadrícula matemática */
@@ -873,4 +873,585 @@ body-modi {
     width: 100%;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* ========================================= */
+/* ESTILOS DEL DASHBOARD CORPORATIVO         */
+/* ========================================= */
+
+.body-dashboard {
+    margin: 0;
+    padding: 0;
+    background-color: #2b1b12; /* Fondo café muy oscuro para contrastar el contenedor */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    height: 600px;
+    background-color: #f7f4ec; /* El beige de GuateCafé */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+/* --- PANEL IZQUIERDO --- */
+.panel-estatico {
+    flex: 0 0 40%;
+    padding: 50px;
+    background-color: #f7f4ec;
+    border-right: 2px solid #e0d8c3; /* Línea divisoria sutil */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo-circle {
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border-radius: 50%;
+    border: 2px solid #8b1c1c; /* Borgoña GuateCafé */
+    margin-bottom: 20px;
+}
+
+.marca-titulo {
+    color: #8b1c1c;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.panel-titulo {
+    color: #3e2723; /* Café oscuro corporativo */
+    font-size: 36px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.panel-desc {
+    color: #5c4d43;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* =================================================== */
+/* FIX DASHBOARD INDEPENDIENTE (GUATECAFÉ ISOLATED)   */
+/* =================================================== */
+
+.gc-body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a0f0b; /* Café profundo corporativo */
+}
+
+.gc-viewport {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 1. CONTENEDOR PRINCIPAL (Más grande, semitransparente y con efecto cristal) */
+.gc-card {
+    display: flex;
+    flex-direction: row;
+    width: 100%;                  /* Ocupa casi todo el ancho disponible */
+    max-width: 1600px;           /* Subimos el límite de ancho */
+    min-height: 700px;           /* Subimos la altura para que respire */
+    background-color: rgba(250, 246, 240, 0.50); /* Crema al 85% de opacidad */
+    backdrop-filter: blur(10px); /* Desenfoca la imagen de fondo detrás del panel */
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* 2. PANEL IZQUIERDO (Hereda la transparencia del contenedor) */
+.gc-left {
+    flex: 0 0 32%;
+    width: 32%;
+    padding: 50px 40px;
+    background-color: transparent; /* Quita el fondo sólido */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    border-right: 1px solid rgba(128, 0, 0, 0.15);
+}
+
+.gc-tag {
+    color: #800000; /* Borgoña */
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.gc-title {
+    color: #2C1810; /* Café oscuro */
+    font-size: 32px;
+    line-height: 1.2;
+    margin: 0 0 16px 0;
+    font-weight: 700;
+}
+
+.gc-desc {
+    color: #5A483C;
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 0 0 24px 0;
+}
+
+.gc-accent-line {
+    width: 60px;
+    height: 4px;
+    background-color: #800000;
+    border-radius: 2px;
+}
+
+/* Contenedor derecho: Alineamos todo desde arriba (flex-start) */
+.gc-right {
+    flex: 0 0 68%;
+    width: 68%;
+    max-width: 68%;
+    background-color: rgba(239, 230, 216, 0.35);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* CLAVE: Pega el contenido hacia la parte superior */
+    align-items: center;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+
+/* Título: Lo separamos del techo y de las tarjetas con márgenes positivos */
+.gc-titulo-derecho {
+    width: 100%;
+    text-align: center;
+    color: #0b4528; /* Verde oscuro según tu captura */
+    font-size: 40px;
+    font-weight: 800;
+    margin-top: 50px;    /* Ajusta este valor para bajar o subir el título respecto al techo */
+    margin-bottom: 70px; /* Espacio exacto entre el título y las tarjetas */
+    letter-spacing: 2px;
+}
+
+/* 1. SLIDER: Recorta todo lo que esté fuera de las 3 tarjetas principales */
+.gc-slider {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 20px;               /* 2 espacios de 20px = 40px en total */
+    padding: 15px 0;
+    overflow: hidden;        /* <--- Oculta la 4ta tarjeta y las siguientes */
+    box-sizing: border-box;
+}
+
+/* 2. TARJETAS: Ancho matemático exacto para que quepan 3 al 100% */
+.gc-item {
+    flex: 0 0 calc((100% - 40px) / 3); /* Reparte el 100% del espacio en 3 tarjetas exactas */
+    min-width: calc((100% - 40px) / 3);
+    max-width: calc((100% - 40px) / 3);
+    min-height: 350px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 30px 18px;
+    box-sizing: border-box;
+    border-top: 5px solid #800000;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.gc-slider {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 0;
+    overflow-x: hidden; /* Oculta la barra de scroll para la animación de cola */
+    box-sizing: border-box;
+}
+
+/* Scrollbar personalizado delgado */
+.gc-slider::-webkit-scrollbar {
+    height: 6px;
+}
+.gc-slider::-webkit-scrollbar-thumb {
+    background: #800000;
+    border-radius: 10px;
+}
+.gc-slider::-webkit-scrollbar-track {
+    background: #D8C8B8;
+}
+
+/* --- Tarjeta Individual --- */
+.gc-item {
+    flex: 0 0 260px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 28px 24px;
+    box-sizing: border-box;
+    border-top: 5px solid #800000;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.gc-item-badge {
+    font-size: 20px;
+    color: #800000;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.gc-item h3 {
+    color: #2C1810;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.gc-item p {
+    color: #666666;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+}
+
+.gc-btn {
+    background-color: #800000;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-align: center;
+}
+
+.gc-btn:hover {
+    background-color: #2C1810;
+}
+
+/* Ajuste Responsivo */
+@media (max-width: 850px) {
+    .gc-card {
+        flex-direction: column;
+    }
+    .gc-left, .gc-right {
+        flex: 1 1 100%;
+    }
+}
+
+/* Encabezado sobre las tarjetas */
+.gc-slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.gc-slider-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: #800000;
+    letter-spacing: 1.5px;
+}
+
+.gc-nav-btn {
+    background: rgba(128, 0, 0, 0.1);
+    color: #800000;
+    border: 1px solid rgba(128, 0, 0, 0.2);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.gc-nav-btn:hover {
+    background: #800000;
+    color: #FFFFFF;
+}
+
+/** Aca Inicia el estilo de la barra lateral izquierda del dashboard **/
+/* =========================================
+1. COLORES BASE Y RESALTADO DE CELDAS
+   ========================================= */
+.col-ficticia {
+    background-color: rgba(200, 200, 200, 0.2);
+    font-style: italic;
+}
+
+.celda-cero {
+    background-color: #fff3cd;
+    font-weight: bold;
+    color: #856404;
+}
+
+.linea-cobertura {
+    background-color: rgba(193, 18, 31, 0.15) !important;
+}
+
+.fila-cubierta {
+    background-color: #fce8e6;
+}
+
+.celda-interseccion {
+    background-color: rgba(193, 18, 31, 0.3) !important;
+    font-weight: bold;
+    color: var(--rojo-cereza, #c1121f);
+    border: 2px solid var(--rojo-cereza, #c1121f) !important;
+    text-align: center;
+}
+
+.celda-optima {
+    background-color: rgba(10, 66, 28, 0.18) !important;
+    color: var(--verde-hoja) !important;
+    font-weight: bold;
+    border: 2px solid var(--verde-hoja) !important;
+}
+
+/* =========================================
+2. TEXTOS, BADGES Y TÍTULOS DE PASOS
+   ========================================= */
+.titulo-paso {
+    color: #0b4d26;
+    border-bottom: 2px solid #b71c1c;
+    padding-bottom: 8px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.descripcion-paso {
+    margin-top: 12px;
+    margin-bottom: 18px;
+    color: #333333;
+    line-height: 1.6;
+}
+
+.paso-badge {
+    display: inline-block;
+    background-color: var(--verde-hoja);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.badge-cero {
+    background-color: #fff3cd;
+    color: #856404;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.badge-interseccion {
+    background-color: #fce8e6;
+    border: 1.5px solid #c1121f;
+    color: #c1121f;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.operacion-resaltada {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.barista-label {
+    font-weight: bold;
+}
+
+.texto-cero {
+    color: #856404;
+    font-weight: bold;
+}
+
+.col-linea {
+    font-style: italic;
+}
+
+/* =========================================
+   3. SISTEMA DE LÍNEAS (PSEUDO-ELEMENTOS)
+   ========================================= */
+.tabla-estilizada td {
+    position: relative;
+}
+
+/* Línea horizontal (para M1, M2 y M3) */
+td.linea-horizontal::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #00ff00;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Línea vertical (para M4 en filas B1 y B4) */
+td.linea-vertical::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 18px; /* Pasa directamente sobre el 0 */
+    width: 2px;
+    background-color: #00ff00;
+    pointer-events: none;
+}
+
+/* Celdas de Intersección (B2-M4 y B3-M4) */
+td.linea-cruzada {
+    color: #c1121f;
+    font-weight: bold;
+}
+
+/* La línea horizontal NACE en la izquierda y MUERE al tope de los 18px */
+td.linea-cruzada::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 18px; 
+    height: 2px;
+    background-color: #00ff00;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* La línea vertical cruza la celda en la misma posición */
+td.linea-cruzada::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 18px;
+    width: 2px;
+    background-color: #00ff00;
+    pointer-events: none;
+}
+
+/* =========================================
+   4. MODIFICADORES DEL ENCABEZADO DE TABLA
+   ========================================= */
+.tabla-estilizada thead tr.fila-super-header {
+    background-color: transparent !important;
+}
+
+.tabla-estilizada thead th.th-vacio {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.tabla-estilizada thead th.th-estaciones-blanco {
+    background-color: transparent !important;
+    color: #0b4d26 !important;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 2px solid #0b4d26 !important;
+    padding-bottom: 6px;
+    padding-top: 4px;
+}
+
+.tabla-estilizada thead tr.fila-principal {
+    background-color: #0b4d26 !important;
+    color: white !important;
+}
+
+.tabla-estilizada thead tr.fila-principal th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.tabla-estilizada thead tr.fila-principal th:last-child {
+    border-top-right-radius: 8px;
+}
+
+/* =========================================
+   FIX DEFINITIVO TABLA HÚNGARO (LÍNEA REBELDE)
+   ========================================= */
+
+/* 1. Mantiene el redondeo de la tabla intacto */
+.tabla-hungaro {
+    border-collapse: separate !important; 
+    border-spacing: 0 !important;
+}
+
+/* 2. Elimina cualquier borde de la fila superior blanca */
+.tabla-hungaro thead tr.fila-super-header th {
+    border: none !important; 
+    background-color: #ffffff !important; /* Fondo blanco sólido para tapar fugas */
+}
+
+/* 3. MATA la línea oscura debajo de ESTACIONES */
+.tabla-hungaro thead th.th-estaciones-blanco {
+    border-bottom: none !important; 
+}
+
+/* 4. Limpia el borde superior de la barra verde para que encaje perfecto */
+.tabla-hungaro thead tr.fila-principal th {
+    border-top: none !important;
+}
+
+
+/* Títulos de sección con línea divisoria (Diseño de la imagen) */
+.titulo-seccion {
+    color: #0b4d26; /* Verde oscuro */
+    border-bottom: 2px solid #c1121f; /* Línea roja inferior */
+    padding-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Ajuste ligero para el primer título de la página */
+.seccion-bloque h2:first-child {
+    margin-top: 0;
+}
+
+.paso-badge-titulo {
+    display: inline-block;
+    background-color: var(--verde-hoja);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
