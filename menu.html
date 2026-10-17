@@ -99,6 +99,8 @@
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
             padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
         .btn-base i {
             font-size: 3rem;
@@ -108,6 +110,7 @@
 
         /* 1. BOTÓN AMARILLO (Enunciado) */
         .btn-amarillo {
+            --clr: #ffcc00;
             color: #ffcc00;
             background: rgba(255, 204, 0, 0.15);
             border: 2px solid #ffcc00;
@@ -124,6 +127,7 @@
 
         /* 2. BOTÓN CELESTE (Estilo TechCore) */
         .btn-cyan {
+            --clr: #00d2ff;
             color: #00d2ff;
             background: rgba(0, 210, 255, 0.15);
             border: 2px solid #00d2ff;
@@ -140,6 +144,7 @@
 
         /* 3. BOTÓN ROJO (YouTube) */
         .btn-rojo {
+            --clr: #ff0000;
             color: #ff0000;
             background: rgba(255, 0, 0, 0.15);
             border: 2px solid #ff0000;
@@ -178,6 +183,44 @@
             text-shadow: 0 0 10px #00a8ff;
             transform: scale(1.2);
         }
+
+/* ====== ANIMACIÓN DE LÍNEAS NEÓN ====== */
+        .btn-base i, .btn-base .texto {
+            position: relative;
+            z-index: 1; /* Mantiene texto por encima */
+        }
+        .btn-base span {
+            position: absolute; display: block;
+        }
+
+        .btn-base .linea1 {
+            top: 0; left: -100%; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--clr));
+            animation: anim1 2s linear infinite;
+        }
+        @keyframes anim1 { 0% { left: -100%; } 50%, 100% { left: 100%; } }
+
+        .btn-base .linea2 {
+            top: -100%; right: 0; width: 4px; height: 100%;
+            background: linear-gradient(180deg, transparent, var(--clr));
+            animation: anim2 2s linear infinite; animation-delay: 0.5s;
+        }
+        @keyframes anim2 { 0% { top: -100%; } 50%, 100% { top: 100%; } }
+
+        .btn-base .linea3 {
+            bottom: 0; right: -100%; width: 100%; height: 4px;
+            background: linear-gradient(270deg, transparent, var(--clr));
+            animation: anim3 2s linear infinite; animation-delay: 1s;
+        }
+        @keyframes anim3 { 0% { right: -100%; } 50%, 100% { right: 100%; } }
+
+        .btn-base .linea4 {
+            bottom: -100%; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(360deg, transparent, var(--clr));
+            animation: anim4 2s linear infinite; animation-delay: 1.5s;
+        }
+        @keyframes anim4 { 0% { bottom: -100%; } 50%, 100% { bottom: 100%; } }
+
         .footer p {
             color: #ccc;
             font-size: 0.9rem;
@@ -218,20 +261,32 @@
                 
                 <!-- BOTÓN 1: Enunciado (Amarillo) -->
                 <a href="modeloHungaro.html" class="btn-base btn-amarillo" target="_blank">
+                    <span class="linea1"></span>
+                    <span class="linea2"></span>
+                    <span class="linea3"></span>
+                    <span class="linea4"></span>
                     <i class="fas fa-file-alt"></i>
-                    <span>Enunciado del<br>Método Húngaro</span>
+                    <div class = "texto">Enunciado del<br>Método Húngaro</div>
                 </a>
 
                 <!-- BOTÓN 2: Las Empresas (Celeste) -->
                 <a href="tech.html" class="btn-base btn-cyan" target="_blank">
+                    <span class="linea1"></span>
+                    <span class="linea2"></span>
+                    <span class="linea3"></span>
+                    <span class="linea4"></span>
                     <i class="fas fa-project-diagram"></i>
-                    <span>Método Húngaro<br>Casos Corporativos</span>
+                    <div class = "texto">Método Húngaro<br>Casos Corporativos</div>
                 </a>
 
                 <!-- BOTÓN 3: YouTube (Rojo) -->
                 <a href="https://youtu.be/vuTfr-3KGTw?si=7I0AKDgmj7iKZmjb" target="_blank" class="btn-base btn-rojo">
+                    <span class="linea1"></span>
+                    <span class="linea2"></span>
+                    <span class="linea3"></span>
+                    <span class="linea4"></span>
                     <i class="fab fa-youtube"></i>
-                    <span>Método Húngaro<br>(Luis @lfredo)</span>
+                    <div class = "texto">Método Húngaro<br>(Luis @lfredo)</div>
                 </a>
 
             </div>
